@@ -44,76 +44,91 @@ class Tado:
     self.username = username
     self.password = password
     self._login()
-    self.id = self.getMe()['homes'][0]['id']
+    self.id = self.get_me()['homes'][0]['id']
 
   def _login(self):
+    self.session = requests.Session()
     url='https://my.tado.com/oauth/token'
     data = { 'client_id'  : 'tado-webapp',
              'grant_type' : 'password',
              'password'   : self.password,
              'scope'      : 'home.user',
              'username'   : self.username }
-    request = requests.post(url, data=data, headers=self.access_headers)
+    request = self.session.post(url, data=data, headers=self.access_headers)
     response = request.json()
     self.access_token = response['access_token']
     self.refresh_token = response['refresh_token']
     self.access_headers['Authorization'] = 'Bearer ' + response['access_token']
+    # We need to talk to api v1 to get a JSESSIONID cookie
+    self.session.get('https://my.tado.com/api/v1/me', headers=self.access_headers)
 
-  def _apiCall(self, cmd):
+  def _api_call(self, cmd, data=False, method='GET'):
+    def call_delete(url):
+      return self.session.delete(url, headers=self.access_headers)
+    def call_put(url, data):
+      return self.session.put(url, headers=self.access_headers, data=json.dumps(data))
+    def call_get(url):
+      return self.session.get(url, headers=self.access_headers)
+
     url = '%s/%s' % (self.api, cmd)
-    request = requests.get(url, headers=self.access_headers)
-    response = request.json()
-    return response
+    if method == 'DELETE':
+      return call_delete(url)
+    elif method == 'PUT' and data:
+      return call_put(url, data).json()
+    elif method == 'GET':
+      return call_get(url).json()
+    else:
+      print("What?")
 
-  def refreshAuth(self):
+  def refresh_auth(self):
     url='https://my.tado.com/oauth/token'
     data = { 'client_id'     : 'tado-webapp',
              'grant_type'    : 'refresh_token',
              'refresh_token' : self.refresh_token,
              'scope'         : 'home.user'
            }
-    request = requests.post(url, data=data, headers=self.headers)
+    request = self.session.post(url, data=data, headers=self.headers)
     response = request.json()
     self.access_token = response['access_token']
     self.refresh_token = response['refresh_token']
     self.access_headers['Authorization'] = 'Bearer ' + self.access_token
 
-  def getCapabilities(self, zone):
-    data = self._apiCall('homes/%i/zones/%i/capabilities' % (self.id, zone))
+  def get_capabilities(self, zone):
+    data = self._api_call('homes/%i/zones/%i/capabilities' % (self.id, zone))
     return data
 
-  def getDevices(self):
-    data = self._apiCall('homes/%i/devices' % self.id)
+  def get_devices(self):
+    data = self._api_call('homes/%i/devices' % self.id)
     return data
 
-  def getHome(self):
-    data = self._apiCall('homes/%i' % self.id)
+  def get_home(self):
+    data = self._api_call('homes/%i' % self.id)
     return data
 
-  def getInstallations(self):
-    data = self._apiCall('homes/%i/installations' % self.id)
+  def get_installations(self):
+    data = self._api_call('homes/%i/installations' % self.id)
     return data
 
-  def getMe(self):
-    data = self._apiCall('me')
+  def get_me(self):
+    data = self._api_call('me')
     return data
 
-  def getMobileDevices(self):
-    data = self._apiCall('homes/%i/mobileDevices' % self.id)
+  def get_mobile_devices(self):
+    data = self._api_call('homes/%i/mobileDevices' % self.id)
     return data
 
-  def getSchedule(self, zone):
-    data = self._apiCall('homes/%i/zones/%i/schedule/activeTimetable' % (self.id, zone))
+  def get_schedule(self, zone):
+    data = self._api_call('homes/%i/zones/%i/schedule/activeTimetable' % (self.id, zone))
     return data
 
-  def getState(self, zone):
-    data = self._apiCall('homes/%i/zones/%i/state' % (self.id, zone))
+  def get_state(self, zone):
+    data = self._api_call('homes/%i/zones/%i/state' % (self.id, zone))
     return data
 
-  def getWeather(self):
-    data = self._apiCall('homes/%i/weather' % self.id)
+  def get_weather(self):
+    data = self._api_call('homes/%i/weather' % self.id)
     return data
 
-  def getZones(self):
-    data = self._apiCall('homes/%i/zones' % self.id)
+  def get_zones(self):
+    data = self._api_call('homes/%i/zones' % self.id)
     return data
