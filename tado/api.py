@@ -132,3 +132,22 @@ class Tado:
   def get_zones(self):
     data = self._api_call('homes/%i/zones' % self.id)
     return data
+
+  def set_temperature(self, zone, temperature, termination='MANUAL'):
+    def get_termination_dict(termination):
+      if termination == 'MANUAL':
+        return { 'type': 'MANUAL' }
+      elif termination == 'AUTO':
+        return { 'type': 'TADO_MODE' }
+      else:
+        return { 'type': 'TIMER', 'durationInSeconds': termination }
+    def get_setting_dict(temperature):
+      if temperature < 5:
+        return { 'type': 'HEATING', 'power': 'OFF' }
+      else:
+        return { 'type': 'HEATING', 'power': 'ON', 'temperature': { 'celsius': temperature } }
+
+    payload = { 'setting': get_setting_dict(temperature),
+                'termination': get_termination_dict(termination)
+              }
+    return self._api_call('homes/%i/zones/%i/overlay' % (self.id, zone), data=payload, method='PUT')
