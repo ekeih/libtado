@@ -151,3 +151,6 @@ class Tado:
                 'termination': get_termination_dict(termination)
               }
     return self._api_call('homes/%i/zones/%i/overlay' % (self.id, zone), data=payload, method='PUT')
+
+  def end_manual_control(self, zone):
+    data = self._api_call('homes/%i/zones/%i/overlay' % (self.id, zone), method='DELETE')
