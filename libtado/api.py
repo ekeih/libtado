@@ -144,6 +144,10 @@ class Tado:
     data = self._api_call('homes/%i/zones/%i/state' % (self.id, zone))
     return data
 
+  def get_users(self):
+    data = self._api_call('homes/%i/users' % self.id)
+    return data
+
   def get_weather(self):
     data = self._api_call('homes/%i/weather' % self.id)
     return data
