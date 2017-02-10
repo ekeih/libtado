@@ -106,6 +106,11 @@ class Tado:
     data = self._api_call('homes/%i/devices' % self.id)
     return data
 
+  def get_early_start(self, zone):
+    """Get the early start configuration of a zone."""
+    data = self._api_call('homes/%i/zones/%i/earlyStart' % (self.id, zone))
+    return data
+
   def get_home(self):
     """Get information about the home."""
     data = self._api_call('homes/%i' % self.id)
@@ -141,6 +146,14 @@ class Tado:
   def get_zones(self):
     data = self._api_call('homes/%i/zones' % self.id)
     return data
+
+  def set_early_start(self, zone, enabled):
+    if enabled:
+      payload = { 'enabled': 'true' }
+    else:
+      payload = { 'enabled': 'false' }
+
+    return self._api_call('homes/%i/zones/%i/earlyStart' % (self.id, zone), payload, method='PUT')
 
   def set_temperature(self, zone, temperature, termination='MANUAL'):
     def get_termination_dict(termination):
