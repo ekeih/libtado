@@ -47,6 +47,7 @@ class Tado:
     self.id = self.get_me()['homes'][0]['id']
 
   def _login(self):
+    """Login and setup the HTTP session."""
     self.session = requests.Session()
     url='https://my.tado.com/oauth/token'
     data = { 'client_id'  : 'tado-webapp',
@@ -63,6 +64,7 @@ class Tado:
     self.session.get('https://my.tado.com/api/v1/me', headers=self.access_headers)
 
   def _api_call(self, cmd, data=False, method='GET'):
+    """Perform an API call."""
     def call_delete(url):
       return self.session.delete(url, headers=self.access_headers)
     def call_put(url, data):
@@ -81,6 +83,7 @@ class Tado:
       print("What?")
 
   def refresh_auth(self):
+    """Refresh an active session."""
     url='https://my.tado.com/oauth/token'
     data = { 'client_id'     : 'tado-webapp',
              'grant_type'    : 'refresh_token',
@@ -94,26 +97,32 @@ class Tado:
     self.access_headers['Authorization'] = 'Bearer ' + self.access_token
 
   def get_capabilities(self, zone):
+    """Get the capabilities of a zone."""
     data = self._api_call('homes/%i/zones/%i/capabilities' % (self.id, zone))
     return data
 
   def get_devices(self):
+    """Get all devices."""
     data = self._api_call('homes/%i/devices' % self.id)
     return data
 
   def get_home(self):
+    """Get information about the home."""
     data = self._api_call('homes/%i' % self.id)
     return data
 
   def get_installations(self):
+    """Get installations. (It is unclear what this is...)"""
     data = self._api_call('homes/%i/installations' % self.id)
     return data
 
   def get_me(self):
+    """Get information about the current user."""
     data = self._api_call('me')
     return data
 
   def get_mobile_devices(self):
+    """Get all mobile devices."""
     data = self._api_call('homes/%i/mobileDevices' % self.id)
     return data
 
