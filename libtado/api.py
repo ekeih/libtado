@@ -121,6 +121,11 @@ class Tado:
     data = self._api_call('homes/%i/installations' % self.id)
     return data
 
+  def get_invitations(self):
+    """Get active invitations."""
+    data = self._api_call('homes/%i/invitations' % self.id)
+    return data
+
   def get_me(self):
     """Get information about the current user."""
     data = self._api_call('me')
