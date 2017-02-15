@@ -12,6 +12,30 @@ $ pip install .
 $ tado -u 'USERNAME' -p 'PASSWORD' whoami
 ```
 
+## Usage
+
+### Command Line Client
+
+Just run `tado` in your terminal and read the help output or take a look at the feature section of this README.
+
+#### Credentials
+
+If you do not want to use `--username` and `--password` everytime you can define some environment variables.
+
+```
+export TADO_USERNAME='USERNAME'
+export TADO_PASSWORD='PASSWORD'
+tado whoami
+```
+
+## API
+
+```
+import tado.api
+t = tado.api('Username', 'Password')
+print(t.get_me())
+```
+
 ## Features
 
 ### Command Line Client
@@ -48,3 +72,22 @@ Commands:
 ### API
 
 ToDo: Replace with feature list.
+
+## License
+
+```
+Copyright (C) 2017  Max Rosin
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+```
