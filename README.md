@@ -28,7 +28,7 @@ export TADO_PASSWORD='PASSWORD'
 tado whoami
 ```
 
-## API
+### API
 
 ```
 import tado.api
