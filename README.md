@@ -7,6 +7,12 @@ A library to control your Tado Smart Thermostat. This repository contains an act
 This will install the library and the command line client:
 
 ```
+$ pip install libtado
+```
+
+or
+
+```
 $ git clone git@github.com:ekeih/libtado.git
 $ pip install .
 $ tado -u 'USERNAME' -p 'PASSWORD' whoami
