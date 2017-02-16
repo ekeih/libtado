@@ -11,7 +11,7 @@ This will install the library and the command line client:
 $ pip install libtado
 ```
 
-Please checkout https://libtado.readthedocs.io for more documentation.
+Please check out https://libtado.readthedocs.io for more documentation.
 
 ## License
 
