@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""tado
+"""libtado
 
 This module provides bindings to the API of https://www.tado.com/ to control
 your smart thermostats.
@@ -137,26 +137,32 @@ class Tado:
     return data
 
   def get_schedule(self, zone):
+    """Get the schedule of a zone."""
     data = self._api_call('homes/%i/zones/%i/schedule/activeTimetable' % (self.id, zone))
     return data
 
   def get_state(self, zone):
+    """Get the current state of a zone."""
     data = self._api_call('homes/%i/zones/%i/state' % (self.id, zone))
     return data
 
   def get_users(self):
+    """Get all users of your home."""
     data = self._api_call('homes/%i/users' % self.id)
     return data
 
   def get_weather(self):
+    """Get the current weather of the location of your home."""
     data = self._api_call('homes/%i/weather' % self.id)
     return data
 
   def get_zones(self):
+    """Get all zones of your home."""
     data = self._api_call('homes/%i/zones' % self.id)
     return data
 
   def set_early_start(self, zone, enabled):
+    """Enable or disable the early start feature of a zone."""
     if enabled:
       payload = { 'enabled': 'true' }
     else:
@@ -165,6 +171,7 @@ class Tado:
     return self._api_call('homes/%i/zones/%i/earlyStart' % (self.id, zone), payload, method='PUT')
 
   def set_temperature(self, zone, temperature, termination='MANUAL'):
+    """Set the desired temperature of a zone."""
     def get_termination_dict(termination):
       if termination == 'MANUAL':
         return { 'type': 'MANUAL' }
@@ -184,4 +191,5 @@ class Tado:
     return self._api_call('homes/%i/zones/%i/overlay' % (self.id, zone), data=payload, method='PUT')
 
   def end_manual_control(self, zone):
+    """End the manual control of a zone."""
     data = self._api_call('homes/%i/zones/%i/overlay' % (self.id, zone), method='DELETE')
