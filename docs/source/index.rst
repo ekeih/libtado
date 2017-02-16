@@ -1,8 +1,9 @@
+===================================
 libtado - Control your tado devices
 ===================================
 
 libtado is a simple Python library that provides methods to control the smart
-heating devices from the German company tado GmbH. It uses the undocumented
+heating devices from the German company `tado GmbH`_. It uses the undocumented
 REST API of their website.
 
 The library is in NO way connected to tado GmbH and is not officially
@@ -12,8 +13,9 @@ The source code is hosted on GitHub_. Feel free to report issues or open
 pull requests.
 
 
+*******
 Content
-^^^^^^^
+*******
 
 .. toctree::
    :maxdepth: 2
@@ -22,16 +24,29 @@ Content
    cli
 
 
+************
 Installation
-^^^^^^^^^^^^
+************
 
-::
+.. code-block:: bash
 
-  $ pip install libtado
+  pip install libtado
 
 
+*****
+Usage
+*****
+
+.. code-block:: python
+
+  import tado.api
+  t = tado.api('Username', 'Password')
+  print(t.get_me())
+
+
+*******
 License
-^^^^^^^
+*******
 
 
   Copyright (C) 2017  Max Rosin
@@ -49,4 +64,11 @@ License
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+**********
+References
+**********
+
+.. target-notes::
+.. _`tado GmbH`: https://www.tado.com
 .. _GitHub: https://github.com/ekeih/libtado
