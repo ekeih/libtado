@@ -97,7 +97,15 @@ class Tado:
     self.access_headers['Authorization'] = 'Bearer ' + self.access_token
 
   def get_capabilities(self, zone):
-    """Get the capabilities of a zone."""
+    """
+    Get the capabilities of a zone.
+
+    Args:
+      zone (int): The zone ID.
+
+    Returns:
+      str: The capabilities of a tado zone as JSON.
+    """
     data = self._api_call('homes/%i/zones/%i/capabilities' % (self.id, zone))
     return data
 
