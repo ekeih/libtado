@@ -98,8 +98,6 @@ class Tado:
 
   def get_capabilities(self, zone):
     """
-    Get the capabilities of a zone.
-
     Args:
       zone (int): The zone ID.
 
@@ -110,7 +108,10 @@ class Tado:
     return data
 
   def get_devices(self):
-    """Get all devices."""
+    """
+    Returns:
+      str: All devices of the home as JSON.
+    """
     data = self._api_call('homes/%i/devices' % self.id)
     return data
 
