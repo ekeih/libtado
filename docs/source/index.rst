@@ -48,7 +48,7 @@ To use the library in your own code you can start with this:
   t = tado.api('Username', 'Password')
   print(t.get_me())
 
-Checkout :ref:`all available API methos <api>` to learn what you can to with
+Check out :ref:`all available API methos <api>` to learn what you can to with
 libtado.
 
 *******
