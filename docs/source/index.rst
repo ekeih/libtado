@@ -21,7 +21,9 @@ Content
 Installation
 ^^^^^^^^^^^^
 
-    $ pip install libtado
+::
+
+  $ pip install libtado
 
 
 .. Indices and tables
