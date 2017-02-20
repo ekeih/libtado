@@ -79,8 +79,6 @@ class Tado:
       return call_put(url, data).json()
     elif method == 'GET':
       return call_get(url).json()
-    else:
-      print("What?")
 
   def refresh_auth(self):
     """Refresh an active session."""
