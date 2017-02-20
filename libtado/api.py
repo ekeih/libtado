@@ -100,7 +100,20 @@ class Tado:
       zone (int): The zone ID.
 
     Returns:
-      str: The capabilities of a tado zone as JSON.
+      dict: The capabilities of a tado zone as dictionary.
+
+    Example
+    =======
+    ::
+
+      {
+        'temperatures': {
+          'celsius': {'max': 25, 'min': 5, 'step': 1.0},
+          'fahrenheit': {'max': 77, 'min': 41, 'step': 1.0}
+        },
+        'type': 'HEATING'
+      }
+
     """
     data = self._api_call('homes/%i/zones/%i/capabilities' % (self.id, zone))
     return data
@@ -108,23 +121,153 @@ class Tado:
   def get_devices(self):
     """
     Returns:
-      str: All devices of the home as JSON.
+      list: All devices of the home as a list of dictionaries.
+
+    Example
+    =======
+    ::
+
+      [
+        {
+          'characteristics': { 'capabilities': [] },
+          'connectionState': {
+            'timestamp': '2017-02-20T18:51:47.362Z',
+            'value': True
+          },
+          'currentFwVersion': '25.15',
+          'deviceType': 'GW03',
+          'gatewayOperation': 'NORMAL',
+          'serialNo': 'SOME_SERIAL',
+          'shortSerialNo': 'SOME_SERIAL'
+        },
+        {
+          'characteristics': {
+            'capabilities': [ 'INSIDE_TEMPERATURE_MEASUREMENT', 'IDENTIFY']
+          },
+          'connectionState': {
+            'timestamp': '2017-01-22T16:03:00.773Z',
+            'value': False
+          },
+          'currentFwVersion': '36.15',
+          'deviceType': 'VA01',
+          'mountingState': {
+            'timestamp': '2017-01-22T15:12:45.360Z',
+            'value': 'UNMOUNTED'
+          },
+          'serialNo': 'SOME_SERIAL',
+          'shortSerialNo': 'SOME_SERIAL'
+        },
+        {
+          'characteristics': {
+            'capabilities': [ 'INSIDE_TEMPERATURE_MEASUREMENT', 'IDENTIFY']
+          },
+          'connectionState': {
+            'timestamp': '2017-02-20T18:33:49.092Z',
+            'value': True
+          },
+          'currentFwVersion': '36.15',
+          'deviceType': 'VA01',
+          'mountingState': {
+            'timestamp': '2017-02-12T13:34:35.288Z',
+            'value': 'CALIBRATED'},
+          'serialNo': 'SOME_SERIAL',
+          'shortSerialNo': 'SOME_SERIAL'
+        },
+        {
+          'characteristics': {
+            'capabilities': [ 'INSIDE_TEMPERATURE_MEASUREMENT', 'IDENTIFY']
+          },
+          'connectionState': {
+            'timestamp': '2017-02-20T18:51:28.779Z',
+            'value': True
+          },
+          'currentFwVersion': '36.15',
+          'deviceType': 'VA01',
+          'mountingState': {
+            'timestamp': '2017-01-12T13:22:11.618Z',
+            'value': 'CALIBRATED'
+           },
+          'serialNo': 'SOME_SERIAL',
+          'shortSerialNo': 'SOME_SERIAL'
+        }
+      ]
     """
     data = self._api_call('homes/%i/devices' % self.id)
     return data
 
   def get_early_start(self, zone):
-    """Get the early start configuration of a zone."""
+    """
+    Get the early start configuration of a zone.
+
+    Args:
+      zone (int): The zone ID.
+
+    Returns:
+      dict: A dictionary with the early start setting of the zone. (True or False)
+
+    Example
+    =======
+    ::
+
+      { 'enabled': True }
+    """
     data = self._api_call('homes/%i/zones/%i/earlyStart' % (self.id, zone))
     return data
 
   def get_home(self):
-    """Get information about the home."""
+    """
+    Get information about the home.
+
+    Returns:
+      dict: A dictionary with information about your home.
+
+    Example
+    =======
+    ::
+
+      {
+        'address': {
+          'addressLine1': 'SOME_STREET',
+          'addressLine2': None,
+          'city': 'SOME_CITY',
+          'country': 'SOME_COUNTRY',
+          'state': None,
+          'zipCode': 'SOME_ZIP_CODE'
+        },
+        'contactDetails': {
+          'email': 'SOME_EMAIL',
+          'name': 'SOME_NAME',
+          'phone': 'SOME_PHONE'
+        },
+        'dateTimeZone': 'Europe/Berlin',
+        'geolocation': {
+          'latitude': SOME_LAT,
+          'longitude': SOME_LONG
+        },
+        'id': SOME_ID,
+        'installationCompleted': True,
+        'name': 'SOME_NAME',
+        'partner': None,
+        'simpleSmartScheduleEnabled': True,
+        'temperatureUnit': 'CELSIUS'
+      }
+    """
     data = self._api_call('homes/%i' % self.id)
     return data
 
   def get_installations(self):
-    """Get installations. (It is unclear what this is...)"""
+    """
+    It is unclear what this does.
+
+    Returns:
+      list: Currently only an empty list.
+
+    Example
+    =======
+    ::
+
+      []
+    """
     data = self._api_call('homes/%i/installations' % self.id)
     return data
 
