@@ -303,7 +303,7 @@ class Tado:
             'dateTimeZone': 'Europe/Berlin',
             'geolocation': {
               'latitude': SOME_LAT,
-              'longitude': SOME_LANG
+              'longitude': SOME_LONG
             },
             'id': SOME_ID,
             'installationCompleted': True,
