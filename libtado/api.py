@@ -272,12 +272,90 @@ class Tado:
     return data
 
   def get_invitations(self):
-    """Get active invitations."""
+    """
+    Get active invitations.
+
+    Returns:
+      list: A list of active invitations to your home.
+
+    Example
+    =======
+    ::
+
+      [
+        {
+          'email': 'SOME_INVITED_EMAIL',
+          'firstSent': '2017-02-20T21:01:44.450Z',
+          'home': {
+            'address': {
+              'addressLine1': 'SOME_STREET',
+              'addressLine2': None,
+              'city': 'SOME_CITY',
+              'country': 'SOME_COUNTRY',
+              'state': None,
+              'zipCode': 'SOME_ZIP_CODE'
+            },
+            'contactDetails': {
+              'email': 'SOME_EMAIL',
+              'name': 'SOME_NAME',
+              'phone': 'SOME_PHONE'
+            },
+            'dateTimeZone': 'Europe/Berlin',
+            'geolocation': {
+              'latitude': SOME_LAT,
+              'longitude': SOME_LANG
+            },
+            'id': SOME_ID,
+            'installationCompleted': True,
+            'name': 'SOME_NAME',
+            'partner': None,
+            'simpleSmartScheduleEnabled': True,
+            'temperatureUnit': 'CELSIUS'
+          },
+          'inviter': {
+            'email': 'SOME_INVITER_EMAIL',
+            'enabled': True,
+            'homeId': SOME_ID,
+            'locale': 'SOME_LOCALE',
+            'name': 'SOME_NAME',
+            'type': 'WEB_USER',
+            'username': 'SOME_USERNAME'
+          },
+          'lastSent': '2017-02-20T21:01:44.450Z',
+          'token': 'SOME_TOKEN'
+        }
+      ]
+    """
+
     data = self._api_call('homes/%i/invitations' % self.id)
     return data
 
   def get_me(self):
-    """Get information about the current user."""
+    """
+    Get information about the current user.
+
+    Returns:
+      dict: A dictionary with information about the current user.
+
+    Example
+    =======
+    ::
+
+      {
+        'email': 'SOME_EMAIL',
+        'homes': [
+          {
+            'id': SOME_ID,
+            'name': 'SOME_NAME'
+          }
+        ],
+        'locale': 'en_US',
+        'mobileDevices': [],
+        'name': 'SOME_NAME',
+        'username': 'SOME_USERNAME'
+      }
+    """
+
     data = self._api_call('me')
     return data
 
