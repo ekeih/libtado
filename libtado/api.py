@@ -576,7 +576,23 @@ class Tado:
     return data
 
   def set_early_start(self, zone, enabled):
-    """Enable or disable the early start feature of a zone."""
+    """
+    Enable or disable the early start feature of a zone.
+
+    Args:
+      zone (int): The zone ID.
+      enabled (bool): Enable (True) or disable (False) the early start feature of the zone.
+
+    Returns:
+      dict: The new configuration of the early start feature.
+
+    Example
+    =======
+    ::
+
+      {'enabled': True}
+    """
+
     if enabled:
       payload = { 'enabled': 'true' }
     else:
@@ -585,7 +601,43 @@ class Tado:
     return self._api_call('homes/%i/zones/%i/earlyStart' % (self.id, zone), payload, method='PUT')
 
   def set_temperature(self, zone, temperature, termination='MANUAL'):
-    """Set the desired temperature of a zone."""
+    """
+    Set the desired temperature of a zone.
+
+    Args:
+      zone (int): The zone ID.
+      temperature (float): The desired temperature in celsius.
+      termination (str/int): The termination mode for the zone.
+
+    Returns:
+      dict: A dictionary with the new zone settings.
+
+    If you set a desired temperature less than 5 celsius it will turn of the zone!
+
+    The termination supports three different mode:
+
+    * "MANUAL": The zone will be set on the desired temperature until you change it manually.
+    * "AUTO": The zone will be set on the desired temperature until the next automatic change.
+    * INTEGER: The zone will be set on the desired temperature for INTEGER seconds.
+
+    Example
+    =======
+    ::
+
+      {
+        'setting': {
+          'power': 'ON',
+          'temperature': {'celsius': 12.0, 'fahrenheit': 53.6},
+          'type': 'HEATING'
+        },
+        'termination': {
+          'projectedExpiry': None,
+          'type': 'MANUAL'
+        },
+        'type': 'MANUAL'
+      }
+    """
+
     def get_termination_dict(termination):
       if termination == 'MANUAL':
         return { 'type': 'MANUAL' }
