@@ -460,7 +460,40 @@ class Tado:
     return data
 
   def get_weather(self):
-    """Get the current weather of the location of your home."""
+    """
+    Get the current weather of the location of your home.
+
+    Returns:
+      dict: A dictionary with weather information for your home.
+
+    Example
+    =======
+    ::
+
+      {
+        'outsideTemperature': {
+          'celsius': 8.49,
+          'fahrenheit': 47.28,
+          'precision': {
+            'celsius': 0.01,
+            'fahrenheit': 0.01
+          },
+          'timestamp': '2017-02-21T12:06:11.296Z',
+          'type': 'TEMPERATURE'
+        },
+        'solarIntensity': {
+          'percentage': 58.4,
+          'timestamp': '2017-02-21T12:06:11.296Z',
+          'type': 'PERCENTAGE'
+        },
+        'weatherState': {
+          'timestamp': '2017-02-21T12:06:11.296Z',
+          'type': 'WEATHER_STATE',
+          'value': 'CLOUDY_PARTLY'
+        }
+      }
+    """
+
     data = self._api_call('homes/%i/weather' % self.id)
     return data
 
