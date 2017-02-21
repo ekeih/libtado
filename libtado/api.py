@@ -498,7 +498,80 @@ class Tado:
     return data
 
   def get_zones(self):
-    """Get all zones of your home."""
+    """
+    Get all zones of your home.
+
+    Returns:
+      list: A list of dictionaries with all your zones.
+
+    Example
+    =======
+    ::
+
+      [
+        { 'dateCreated': '2016-12-23T15:53:43.615Z',
+          'dazzleEnabled': True,
+          'deviceTypes': ['VA01'],
+          'devices': [
+            {
+              'characteristics': {
+                'capabilities': [ 'INSIDE_TEMPERATURE_MEASUREMENT', 'IDENTIFY']
+              },
+              'connectionState': {
+                'timestamp': '2017-02-21T14:22:45.913Z',
+                'value': True
+              },
+              'currentFwVersion': '36.15',
+              'deviceType': 'VA01',
+              'duties': ['ZONE_UI', 'ZONE_DRIVER', 'ZONE_LEADER'],
+              'mountingState': {
+                'timestamp': '2017-02-12T13:34:35.288Z',
+                'value': 'CALIBRATED'
+              },
+              'serialNo': 'SOME_SERIAL',
+              'shortSerialNo': 'SOME_SERIAL'
+            }
+          ],
+          'id': 1,
+          'name': 'SOME_NAME',
+          'reportAvailable': False,
+          'supportsDazzle': True,
+          'type': 'HEATING'
+        },
+        {
+          'dateCreated': '2016-12-23T16:16:11.390Z',
+          'dazzleEnabled': True,
+          'deviceTypes': ['VA01'],
+          'devices': [
+            {
+              'characteristics': {
+                'capabilities': [ 'INSIDE_TEMPERATURE_MEASUREMENT', 'IDENTIFY']
+              },
+              'connectionState': {
+                'timestamp': '2017-02-21T14:19:40.215Z',
+                'value': True
+              },
+              'currentFwVersion': '36.15',
+              'deviceType': 'VA01',
+              'duties': ['ZONE_UI', 'ZONE_DRIVER', 'ZONE_LEADER'],
+              'mountingState': {
+                'timestamp': '2017-01-12T13:22:11.618Z',
+                'value': 'CALIBRATED'
+              },
+              'serialNo': 'SOME_SERIAL',
+              'shortSerialNo': 'SOME_SERIAL'
+            }
+          ],
+          'id': 3,
+          'name': 'SOME_NAME ',
+          'reportAvailable': False,
+          'supportsDazzle': True,
+          'type': 'HEATING'
+        }
+      ]
+
+    """
+
     data = self._api_call('homes/%i/zones' % self.id)
     return data
 
