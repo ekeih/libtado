@@ -365,7 +365,32 @@ class Tado:
     return data
 
   def get_schedule(self, zone):
-    """Get the schedule of a zone."""
+    """
+    Get the type of the currently configured schedule of a zone.
+
+    Args:
+      zone (int): The zone ID.
+
+    Returns:
+      dict: A dictionary with the ID and type of the schedule of the zone.
+
+    Tado allows three different types of a schedule for a zone:
+
+    * The same schedule for all seven days of a week.
+    * One schedule for weekdays, one for saturday and one for sunday.
+    * Seven different schedules - one for every day of the week.
+
+
+    Example
+    =======
+    ::
+
+      {
+        'id': 1,
+        'type': 'THREE_DAY'
+      }
+    """
+
     data = self._api_call('homes/%i/zones/%i/schedule/activeTimetable' % (self.id, zone))
     return data
 
