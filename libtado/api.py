@@ -395,7 +395,62 @@ class Tado:
     return data
 
   def get_state(self, zone):
-    """Get the current state of a zone."""
+    """
+    Get the current state of a zone including its desired and current temperature. Check out the example output for more.
+
+    Args:
+      zone (int): The zone ID.
+
+    Returns:
+      dict: A dictionary with the current settings and sensor measurements of the zone.
+
+    Example
+    =======
+    ::
+
+      {
+        'activityDataPoints': {
+          'heatingPower': {
+            'percentage': 0.0,
+            'timestamp': '2017-02-21T11:56:52.204Z',
+            'type': 'PERCENTAGE'
+          }
+        },
+        'geolocationOverride': False,
+        'geolocationOverrideDisableTime': None,
+        'link': {'state': 'ONLINE'},
+        'overlay': None,
+        'overlayType': None,
+        'preparation': None,
+        'sensorDataPoints': {
+          'humidity': {
+            'percentage': 44.0,
+            'timestamp': '2017-02-21T11:56:45.369Z',
+            'type': 'PERCENTAGE'
+          },
+          'insideTemperature': {
+            'celsius': 18.11,
+            'fahrenheit': 64.6,
+            'precision': {
+              'celsius': 1.0,
+              'fahrenheit': 1.0
+            },
+            'timestamp': '2017-02-21T11:56:45.369Z',
+            'type': 'TEMPERATURE'
+          }
+        },
+        'setting': {
+          'power': 'ON',
+          'temperature': {
+            'celsius': 20.0,
+            'fahrenheit': 68.0
+          },
+          'type': 'HEATING'
+        },
+        'tadoMode': 'HOME'
+      }
+    """
+
     data = self._api_call('homes/%i/zones/%i/state' % (self.id, zone))
     return data
 
