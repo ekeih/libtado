@@ -5,29 +5,32 @@ A library to control your Tado Smart Thermostat. This repository contains an act
 
 ## Installation
 
-This will install the library and the command line client:
+This will install the official library and the command line client:
 
 ```
 $ pip install libtado
 ```
 
+and this will install THIS library for local usage
+
+```sh
+$ git clone https://github.com/germainlefebvre4/libtado.git
+```
+
 Please check out https://libtado.readthedocs.io for more documentation.
 
-## License
+## Usage
 
-```
-Copyright (C) 2017  Max Rosin
+Copy the library directory in your workdir.
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Now you can call it in your Pyhton script !
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+```python
+import api
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+t = api.Tado('my@email.com', 'myPassword')
+print(t.get_me())
+print(t.get_home())
+print(t.get_zones())
+print(t.get_state(1))
 ```
