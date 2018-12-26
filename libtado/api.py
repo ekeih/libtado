@@ -49,8 +49,8 @@ class Tado:
   def _login(self):
     """Login and setup the HTTP session."""
     self.session = requests.Session()
-    url='https://my.tado.com/oauth/token'
-    data = { 'client_id'  : 'tado-webapp',
+    url='https://auth.tado.com/oauth/token'
+    data = { 'client_id'  : 'tado-web-app',
              'grant_type' : 'password',
              'password'   : self.password,
              'scope'      : 'home.user',
