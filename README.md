@@ -41,7 +41,7 @@ Download the repository. You can work inside it. Beware the examples considere t
 Now you can call it in your Pyhton script !
 
 ```python
-import api
+import libtado.api
 
 t = api.Tado('my@email.com', 'myPassword', 'client_secret')
 
