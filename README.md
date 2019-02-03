@@ -54,5 +54,5 @@ print(t.get_state(1))
 ## Examples
 
 An example script is provided in the repository as `example.py`.
-It show you haw to use the library and expose some structured responses.
+It shows you how to use the library and expose some structured responses. A more detailed example is available in `libtado/__main__.py`.
 
