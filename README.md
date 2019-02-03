@@ -32,7 +32,7 @@ username: email@example.com
 
 Then you just have to get the value in the attribute `client_secret`. You will need it to connect to your account through Tado APIs. The `client_secret` never dies so you can base your script on it.
 
-*Your `CLIENT_SECRET` must keep secret.*
+*Your `CLIENT_SECRET` must be kept secret.*
 
 ## Usage
 
