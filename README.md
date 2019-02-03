@@ -8,7 +8,7 @@ A library to control your Tado Smart Thermostat. This repository contains an act
 
 You can download official library with `pip install libtado`.
 
-But ifyou want to benefits with improvements for API v2 you will need to download this library.
+But because I do not own a Tado anymore you may want to use a fork of libtado instead. For example you can install the fork that is currently (February 2019) maintained and improved by @germainlefebvre4. Please note that I do not monitor or verify changes of this repository. Please check the source yourself.
 
 ```sh
 git clone https://github.com/germainlefebvre4/libtado.git
