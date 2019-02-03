@@ -53,6 +53,6 @@ print(t.get_state(1))
 
 ## Examples
 
-An script example is provided in the repository as `example.py`.
+An example script is provided in the repository as `example.py`.
 It show you haw to use the library and expose some structured responses.
 
