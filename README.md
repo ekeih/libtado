@@ -36,7 +36,7 @@ Then you just have to get the value in the attribute `client_secret`. You will n
 
 ## Usage
 
-Download the repository. You can work inside it. Beware the examples considere they can acces to the file `./libtado/api.py`.
+Download the repository. You can work inside it. Beware that the examples assume that they can access the file `./libtado/api.py`.
 
 Now you can call it in your Pyhton script !
 
