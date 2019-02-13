@@ -40,21 +40,23 @@ class Tado:
   access_headers = headers
   api            = 'https://my.tado.com/api/v2'
 
-  def __init__(self, username, password):
+  def __init__(self, username, password, secret):
     self.username = username
     self.password = password
+    self.secret = secret
     self._login()
     self.id = self.get_me()['homes'][0]['id']
 
   def _login(self):
     """Login and setup the HTTP session."""
     self.session = requests.Session()
-    url='https://my.tado.com/oauth/token'
-    data = { 'client_id'  : 'tado-webapp',
-             'grant_type' : 'password',
-             'password'   : self.password,
-             'scope'      : 'home.user',
-             'username'   : self.username }
+    url='https://auth.tado.com/oauth/token'
+    data = { 'client_id'     : 'tado-web-app',
+             'client_secret' : self.secret,
+             'grant_type'    : 'password',
+             'password'      : self.password,
+             'scope'         : 'home.user',
+             'username'      : self.username }
     request = self.session.post(url, data=data, headers=self.access_headers)
     response = request.json()
     self.access_token = response['access_token']
@@ -352,7 +354,8 @@ class Tado:
         'locale': 'en_US',
         'mobileDevices': [],
         'name': 'SOME_NAME',
-        'username': 'SOME_USERNAME'
+        'username': 'SOME_USERNAME',
+        'secret': 'SOME_CLIENT_SECRET'
       }
     """
 
